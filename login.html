@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dr|AhmedHamza</title>
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .welcome-side {
+            flex: 1;
+            background: #121212;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .welcome-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .welcome-content h1 {
+            font-size: 4em;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-content p {
+            font-size: 1.2em;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .login-side {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #121212;
+            padding: 2rem;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+            color: #ecf0f1;
+            text-align: center;
+        }
+
+        .login-subtitle {
+            font-size: 1.1em;
+            color: #bdc3c7;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1em;
+            color: #ecf0f1;
+        }
+
+        input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            background: #23272f;
+            font-size: 1em;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            color: #ecf0f1;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: #95a5a6;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: right;
+        }
+
+        .login-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 40px;
+            background: #23272f;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+        .login-button:hover {
+            background: #2c3e50;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-button i {
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 992px) {
+            .welcome-content h1 {
+                font-size: 3.5em;
+            }
+            .welcome-content p {
+                font-size: 1.1em;
+            }
+            .login-container {
+                max-width: 350px;
+            }
+            h2 {
+                font-size: 2.2em;
+            }
+            .login-subtitle {
+                font-size: 1em;
+            }
+            label {
+                font-size: 1em;
+            }
+            input {
+                padding: 10px;
+            }
+            .login-button {
+                padding: 10px 30px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+
+            .welcome-side {
+                display: flex;
+                height: 25vh;
+            }
+
+            .login-side {
+                height: 75vh;
+                padding: 1rem;
+            }
+
+            .login-container {
+                padding: 1rem;
+                max-width: 90%;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .login-subtitle {
+                font-size: 0.85em;
+            }
+            label {
+                font-size: 0.85em;
+            }
+            input {
+                padding: 7px;
+            }
+            .login-button {
+                padding: 7px 20px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-side {
+                height: 20vh;
+            }
+            .welcome-content h1 {
+                font-size: 2.5em;
+            }
+            .welcome-content p {
+                font-size: 0.9em;
+            }
+            .login-side {
+                height: 80vh;
+                padding: 0.5rem;
+            }
+            .login-container {
+                padding: 0.7rem;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .login-subtitle {
+                font-size: 0.75em;
+            }
+            .form-group {
+                margin-bottom: 0.8rem;
+            }
+            label {
+                font-size: 0.75em;
+            }
+            input {
+                padding: 5px;
+                font-size: 0.8em;
+            }
+            .login-button {
+                padding: 6px 15px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="split-container">
+        <div class="welcome-side">
+            <div class="welcome-content">
+                <h1>Welcome</h1>
+                <p style="font-size: 1.8em;">🌟 اللهم صل وسلم وبارك علي سيدنا محمد</p>
+            </div>
+        </div>
+        <div class="login-side">
+            <div class="login-container">
+                <h2>Login</h2>
+                <form id="loginForm" onsubmit="return validateLogin(event)">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                        <div class="error-message" id="usernameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+                    <button type="submit" class="login-button">Login &rarr;</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const usernameError = document.getElementById('usernameError');
+            const passwordError = document.getElementById('passwordError');
+            
+            // Reset error messages
+            usernameError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // Check credentials
+            if (username === 'DRAhmed' && password === '12345') {
+                // Set login status and redirect after delay
+                setTimeout(() => {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'index.html';
+                }, 500);
+                
+                return false;
+            } else {
+                // Failed login with animation
+                if (username !== 'DRAhmed') {
+                    usernameError.textContent = 'Incorrect username';
+                    usernameError.style.display = 'block';
+                    document.getElementById('username').style.animation = 'shake 0.5s ease-in-out';
+                }
+                if (password !== '12345') {
+                    passwordError.textContent = 'Incorrect password';
+                    passwordError.style.display = 'block';
+                    document.getElementById('password').style.animation = 'shake 0.5s ease-in-out';
+                }
+                
+                // Reset animation after it completes
+                setTimeout(() => {
+                    document.getElementById('username').style.animation = '';
+                    document.getElementById('password').style.animation = '';
+                }, 500);
+                
+                return false;
+            }
+        }
+    </script>
+</body>
+</html> 
